@@ -51,6 +51,37 @@
 - default-lease-time 600  
     Lama waktu default client bisa menyewa IP sebelum harus meminta ulang. Nilai 600 detik sama dengan 10 menit.  
 - max-lease-time 7200  
-    Lama waktu maksimum sebuah client bisa mempertahankan IP sebelum harus diperpanjang. Nilai 7200 detik berarti 2 jam.
+    Lama waktu maksimum sebuah client bisa mempertahankan IP sebelum harus diperpanjang. Nilai 7200 detik berarti 2 jam.  
   
-  5. 
+  5. Setelah selesai selanjutnya kita akan mengatur interface DHCP di */etc/default/isc-dhcp-server*. Buka dengan text editor seperti biasa, bisa menggunakan nano. Lalu ubah sesuai dengan nama interface yang dipakai server, disini kita menggunakan enp0s3.   
+![](IMAGES/)  
+  
+  Lalu jangan lupa save lalu exit.  
+
+  6. Setelah ini, langkah berikutnya adalah restart service DHCP Server agar konfigurasi baru langsung diterapkan. Caranya kita bisa menggunakan.  
+       
+![](IMAGES/)  
+     Jika tidak muncul apa-apa, itu tandanya service berhasil direstart tanpa ada error apa-apa. Untuk memastikan DHCP Server benar-benar aktif, gunakan.  
+![](IMAGES/)  
+     Kalau berhasil, status akan menunjukan **active (running).  
+  
+  7. Selanjutnya kita beralih ke client, pertama kita masuk ke control panel caranya, klik kanan Network statuc icon di taskbar kanan bawah lalu pilih Open network and internet settings. Nah disana klik change adapter option.  
+![](IMAGES/)  
+     Selanjutnya kita pilih adapter host-only, lalu pastikan bahwa IP nya di atur DHCP.  
+![](IMAGES/)  
+    
+  8. Jika sudah kita buka properties untuk melihat apakah sudah dapat IP dari server apa belum. Jika belum matikan dulu adapternya lalu nyalakan lagi.  
+![](IMAGES/)  
+
+# Troubleshooting
+  Ada beberapa masalah yang sering ditemukan saat konfigurasi DHCP Server di Debian ini. Seperti:  
+  1. Tidak mendapat IP padahal konfigurasi di debian sudah 100% benar
+       Untuk mengatasinya kita bisa menghapus seluruh adapter host-only mengunakan device manager (Win + X > Device Manager > Network Adapters).  
+![](IMAGES/)  
+       Jika sudah kita bisa tambahkan lagi host-only adapter di VBOX, VBOX > Tools > Network.
+![](IMAGES/)
+       Jangan lupa ubah adapter di settings debian vbox nya menjadi adapter yang baru dibuat.
+     Jika masih tidak mendapatkan IP, kita bisa full uninstall VBOX nya melalui control panel (jangan dihapus foldernya aja, pake uninstall agar drivernya ikut ke hapus). Lalu install ulang software VBOX nya, direkomendasikan upgrade versi jika ada update.
+
+# Kesimpulan
+  DHCP Server ini berfungsi untuk membagikan alamat IP secara otomatis kepada client, sehingga lebih efisien tanpa perlu konfigurasi manual.
