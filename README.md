@@ -8,14 +8,14 @@
   1. Pertama-tama kita perlu memastikan paket DHCP Server sudah tersedia di Debian. Caranya jalankan perintah:
 
          apt install isc-dhcp-server -y
-![](IMAGES/)  
+![](IMAGES/godimactuallyinvested.png)  
     Jika muncul pesan *isc-dhcp-server is already the newest version*, berarti DHCP Server sudah terpasang dengan versi paling baru, jadi kita bisa langsung lanjut ke tahap konfigurasi.  
       
   2. Setelah DHCP Server berhasil install, kita perlu menambahkan Static IP. Hal ini bertujuan agar server selalu punya identitas jaringan tetap dan bisa menjadi pusat pembagian IP ke client. Untuk mengkonfigurasinya kita bisa menjalankan,  
 
     nano /etc/network/interfaces
   Lalu isi seperti berikut.  
-![](IMAGES/)  
+![](IMAGES/thinkireallywantthis.png)  
   Jangan lupa save dengan **CTRL + X lalu Y dan Enter**.  
     
   3. Jika sudah melakukan konfigurasi IP, jangan lupa restart network servicenya agar perubahan diterapkan, caranya kita bisa menggunakan,  
@@ -24,14 +24,14 @@
   Kemudian, untuk memastikan apakah alamat IP benar apa belum, gunakan,  
 
     ip a
-![](IMAGES/)  
+![](IMAGES/imnotevenkidding.png)  
   Hasilnya akan menampilkan daftar interface jaringan. Jika pada interface enp0s3 sudah muncul IP 192.168.22.1/24, artinya konfigurasi berhasil diterapkan.  
     
   4. Nah selanjutnya kita konfigurasi DHCP Servernya. Pertama buka dhcpd.conf dengan text editor.
 
     nano /etc/dhcp/dhcpd.conf
   Disini kita cukup cari **Slighty** saja, dan buka tanda pagar nya. Lalu konfigurasi seperti berikut ini.  
-![](IMAGES/)  
+![](IMAGES/noimactuallyinvested.png)  
   
   Jika konfigurasi sudah selesai, simpan dengan CTRL + X, Y lalu Enter.  
     
@@ -54,32 +54,32 @@
     Lama waktu maksimum sebuah client bisa mempertahankan IP sebelum harus diperpanjang. Nilai 7200 detik berarti 2 jam.  
   
   5. Setelah selesai selanjutnya kita akan mengatur interface DHCP di */etc/default/isc-dhcp-server*. Buka dengan text editor seperti biasa, bisa menggunakan nano. Lalu ubah sesuai dengan nama interface yang dipakai server, disini kita menggunakan enp0s3.   
-![](IMAGES/)  
+![](IMAGES/haventevenmetyet.png)  
   
   Lalu jangan lupa save lalu exit.  
 
   6. Setelah ini, langkah berikutnya adalah restart service DHCP Server agar konfigurasi baru langsung diterapkan. Caranya kita bisa menggunakan.  
        
-![](IMAGES/)  
+![](IMAGES/wishthatiwaskidding.png)  
      Jika tidak muncul apa-apa, itu tandanya service berhasil direstart tanpa ada error apa-apa. Untuk memastikan DHCP Server benar-benar aktif, gunakan.  
-![](IMAGES/)  
+![](IMAGES/imnotandihateit.png)  
      Kalau berhasil, status akan menunjukan **active (running).  
   
   7. Selanjutnya kita beralih ke client, pertama kita masuk ke control panel caranya, klik kanan Network statuc icon di taskbar kanan bawah lalu pilih Open network and internet settings. Nah disana klik change adapter option.  
-![](IMAGES/)  
+![](IMAGES/godimactuallyinvestedd.png)  
      Selanjutnya kita pilih adapter host-only, lalu pastikan bahwa IP nya di atur DHCP.  
-![](IMAGES/)  
+![](IMAGES/haventevenmetyett.png)  
     
   8. Jika sudah kita buka properties untuk melihat apakah sudah dapat IP dari server apa belum. Jika belum matikan dulu adapternya lalu nyalakan lagi.  
-![](IMAGES/)  
+![](IMAGES/watchthisbethewrongthingclassic.png)  
 
 # Troubleshooting
   Ada beberapa masalah yang sering ditemukan saat konfigurasi DHCP Server di Debian ini. Seperti:  
   1. Tidak mendapat IP padahal konfigurasi di debian sudah 100% benar
        Untuk mengatasinya kita bisa menghapus seluruh adapter host-only mengunakan device manager (Win + X > Device Manager > Network Adapters).  
-![](IMAGES/)  
+![](IMAGES/GodImjumpinginthedeepend.png)  
        Jika sudah kita bisa tambahkan lagi host-only adapter di VBOX, VBOX > Tools > Network.
-![](IMAGES/)
+![](IMAGES/Itsmorefuntoswimin.png)
        Jangan lupa ubah adapter di settings debian vbox nya menjadi adapter yang baru dibuat.
      Jika masih tidak mendapatkan IP, kita bisa full uninstall VBOX nya melalui control panel (jangan dihapus foldernya aja, pake uninstall agar drivernya ikut ke hapus). Lalu install ulang software VBOX nya, direkomendasikan upgrade versi jika ada update.
 
